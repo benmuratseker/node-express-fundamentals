@@ -3,6 +3,8 @@ import { join } from 'node:path';
 
 const app = express();
 
+app.use(express.static(join(process.cwd(), 'src', 'public')));
+
 function requestCallback(request, response){
     response.status(200)
             .send(`request received`);
@@ -18,7 +20,7 @@ app.get('/simple-text', (request, response) => {
 app.get('/concerts', (request, response) => {
     //const filePath = `${process.cwd()}/src/public/concerts.html`
     const filePath = join(process.cwd(), 'src', 'public', 'concerts.html');
-    response.status(200).sendFile(filePath);
+    response.status(200).set({ 'Content-Type' : 'text/html' }).sendFile(filePath);
 })
 
 app.listen(3000);

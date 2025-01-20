@@ -5,6 +5,9 @@ const app = express();
 
 app.use(express.static(join(process.cwd(), 'src', 'public')));
 
+app.set('view engine', 'ejs');
+app.set('view', './src/public/views');
+
 function requestCallback(request, response){
     response.status(200)
             .send(`request received`);
